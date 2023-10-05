@@ -41,7 +41,7 @@ int main()
 		while (!myFile.eof()) {
 			myFile.getline(buf, 1024);//Extracts characters from the stream as unformatted input and stores them into buf as a c-string 
 			//until either the extracted character is '\n', or 1024 characters have been written to buf .
-			cout << buf << "\n\n";
+			cout << buf << "\n";
 
 
 			string temp;
