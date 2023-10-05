@@ -6,31 +6,34 @@
 #include <sstream>
 using namespace std;
 
+class WordFreqPair {
+
+public:
+	string word;
+	int Count;
+
+	WordFreqPair(string newWord, int newCount) {
+		word = newWord;
+		Count = newCount;
+	}
+
+	//~WordFreqPair() {}
+
+};
+
+
 int main()
 {
-	//excise2
-	//vector
-
-	/*vector<unsigned> grade{ 100, 98, 15, 30, 25, 70, 82, 66, 78, 40 };
-	vector<unsigned> scores(11, 0);
-
-	for (auto i : grade)
-	{
-		++scores[i / 10];
-	}
-	string result;
-	for (auto j : scores)
-		cout << j << "";
-	cout << endl;*/
-
-	//excise 3 
+	
 	char buf[1024];
 	string filename = "input.txt";
 	ifstream myFile(filename);  // filename
 
 	int numberOfWords = 0;
 	int numberOfSentences = 0;
-	vector< pair<string,int>> wordList;
+	vector<WordFreqPair> wordList;
+
+	
 
 	
 	if (myFile.is_open()) {
@@ -38,37 +41,48 @@ int main()
 		while (!myFile.eof()) {
 			myFile.getline(buf, 1024);//Extracts characters from the stream as unformatted input and stores them into buf as a c-string 
 			//until either the extracted character is '\n', or 1024 characters have been written to buf .
-			cout << buf << endl;
+			cout << buf << "\n\n";
+
 
 			string temp;
-			stringstream stream(buf);
+			stringstream stream(buf); // buf turned into stream for easier reading of data
+			
 
-			while(getline(stream, temp, ' ')) {
-
+			while(getline(stream, temp, ' ')) { // seperates buf by space char to seperate words
 				
+				if (ispunct(temp.back())) { // checks and removes puctuation from end of string
 
-				for (int i = 0; i < temp.length() - 1; i++) {
-					if (ispunct(temp[i])) {
+					if (temp.back() == '.' || temp.back() == '!' || temp.back() == '?') {
+						numberOfSentences++; // records number of sentence endings
+					}
 
-						if (temp[i] == '.') {
-							numberOfSentences++;
+					temp.erase(temp.length()-1);
+				}
+				
+				bool duplicate = false;
+				if (!wordList.empty()) {
+
+
+					for (int i = 0; i < wordList.size() - 1; i++) {
+						
+						if (wordList[i].word == temp) {
+							wordList[i].Count++;
+
+							duplicate = true;
+							break;
 						}
-
-						temp.erase(i, 1);
 					}
+
+					if (!duplicate) {
+						wordList.push_back(WordFreqPair(temp, 1));
+					}
+
+
+				}
+				else {
+					wordList.push_back(WordFreqPair(temp, 1));
 				}
 
-				cout << temp << endl;
-
-				for (pair<string,int> word : wordList) {
-					if (word.first == temp) {
-						word.second++;
-					}
-					else {
-						cout << "word Second";
-						wordList.push_back(make_pair(temp, 1));
-					}
-				}
 				numberOfWords++;
 			}
 
@@ -78,10 +92,12 @@ int main()
 
 	cout << "number of sentences is " << numberOfSentences << endl;
 	cout << "number of words is " << numberOfWords << endl;
-	for (pair<string,int> word : wordList) {
-		cout << word.first << " " << word.second << endl;
+	for (WordFreqPair word : wordList) {
+		cout << word.word << "    " << word.Count << endl;
 	}
 
 
 	return 0;
 }
+
+
