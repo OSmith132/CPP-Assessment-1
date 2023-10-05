@@ -45,22 +45,27 @@ int main()
 
 			while(getline(stream, temp, ' ')) {
 
+				
+
 				for (int i = 0; i < temp.length() - 1; i++) {
 					if (ispunct(temp[i])) {
 
-						if (character == '.') {
+						if (temp[i] == '.') {
 							numberOfSentences++;
 						}
 
-						string& erase(size_t pos = 0, size_t len = npos);
+						temp.erase(i, 1);
 					}
 				}
+
+				cout << temp << endl;
 
 				for (pair<string,int> word : wordList) {
 					if (word.first == temp) {
 						word.second++;
 					}
 					else {
+						cout << "word Second";
 						wordList.push_back(make_pair(temp, 1));
 					}
 				}
@@ -71,6 +76,11 @@ int main()
 		myFile.close();
 	}
 
+	cout << "number of sentences is " << numberOfSentences << endl;
+	cout << "number of words is " << numberOfWords << endl;
+	for (pair<string,int> word : wordList) {
+		cout << word.first << " " << word.second << endl;
+	}
 
 
 	return 0;
