@@ -50,7 +50,7 @@ int main()
 
 			while(getline(stream, temp, ' ')) { // seperates buf by space char to seperate words
 				
-				if (ispunct(temp.back())) { // checks and removes puctuation from end of string  (should probablt make all string lowercase as there are duplicate words but not specified in the brief)
+				if (ispunct(temp.back())) { // checks and removes puctuation from end of string  (should probably make all strings lowercase as there are duplicate words but not specified in the brief)
 
 					if (temp.back() == '.' || temp.back() == '!' || temp.back() == '?') {
 						numberOfSentences++; // records number of sentence endings
