@@ -50,23 +50,23 @@ int main()
 
 			while(getline(stream, temp, ' ')) { // seperates buf by space char to seperate words
 				
-				if (ispunct(temp.back())) { // checks and removes puctuation from end of string
+				if (ispunct(temp.back())) { // checks and removes puctuation from end of string  (should probablt make all string lowercase as there are duplicate words but not specified in the brief)
 
 					if (temp.back() == '.' || temp.back() == '!' || temp.back() == '?') {
 						numberOfSentences++; // records number of sentence endings
 					}
 
-					temp.erase(temp.length()-1);
+					temp.erase(temp.length()-1); // removes any puctuation
 				}
 				
 				bool duplicate = false;
-				if (!wordList.empty()) {
+				if (!wordList.empty()) { 
 
 
-					for (int i = 0; i < wordList.size() - 1; i++) {
+					for (int i = 0; i < wordList.size() - 1; i++) { // checks if this is the first occurrence of the word
 						
-						if (wordList[i].word == temp) {
-							wordList[i].Count++;
+						if (wordList[i].word == temp) { 
+							wordList[i].Count++; // adds 1 to word count if duplicate
 
 							duplicate = true;
 							break;
@@ -74,13 +74,13 @@ int main()
 					}
 
 					if (!duplicate) {
-						wordList.push_back(WordFreqPair(temp, 1));
+						wordList.push_back(WordFreqPair(temp, 1)); // adds word to vector if not seen yet
 					}
 
 
 				}
 				else {
-					wordList.push_back(WordFreqPair(temp, 1));
+					wordList.push_back(WordFreqPair(temp, 1)); // adds first word to the vector
 				}
 
 				numberOfWords++;
@@ -90,7 +90,7 @@ int main()
 		myFile.close();
 	}
 
-	cout << "number of sentences is " << numberOfSentences << endl;
+	cout << "number of sentences is " << numberOfSentences << endl; // outputs results to console
 	cout << "number of words is " << numberOfWords << endl;
 	for (WordFreqPair word : wordList) {
 		cout << word.word << "    " << word.Count << endl;
