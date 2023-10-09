@@ -17,7 +17,7 @@ public:
 		Count = newCount;
 	}
 
-	//~WordFreqPair() {}
+	~WordFreqPair() {}
 
 };
 
@@ -41,7 +41,7 @@ int main()
 		while (!myFile.eof()) {
 			myFile.getline(buf, 1024);//Extracts characters from the stream as unformatted input and stores them into buf as a c-string 
 			//until either the extracted character is '\n', or 1024 characters have been written to buf .
-			cout << buf << "\n\n";
+			cout << buf << "\n";
 
 
 			string temp;
@@ -90,10 +90,11 @@ int main()
 		myFile.close();
 	}
 
-	cout << "number of sentences is " << numberOfSentences << endl; // outputs results to console
+	cout << "\n\nnumber of sentences is " << numberOfSentences << endl; // outputs results to console
 	cout << "number of words is " << numberOfWords << endl;
 	for (WordFreqPair word : wordList) {
-		cout << word.word << "    " << word.Count << endl;
+		string space(8 - word.word.length(), ' ');
+		cout << word.word << space << word.Count << endl;
 	}
 
 
