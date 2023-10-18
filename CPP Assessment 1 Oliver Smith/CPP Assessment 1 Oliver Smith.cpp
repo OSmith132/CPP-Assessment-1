@@ -82,7 +82,6 @@ int main()
 				else {
 					wordList.push_back(WordFreqPair(temp, 1)); // adds first word to the vector
 				}
-
 				numberOfWords++;
 			}
 
