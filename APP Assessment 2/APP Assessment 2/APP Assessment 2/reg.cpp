@@ -1,10 +1,17 @@
 #include "reg.h"
 
+/// <summary>
+/// Outputs the value for the 'attend' property to the console 
+/// </summary>
 void Registration::output()
 {
 	cout << "attend = " << attend << endl;
 }
 
+/// <summary>
+/// Sets the 'code' property to the user's input and used checkCode() to compare it to the access code
+/// </summary>
+/// <returns></returns>
 bool Registration::input()
 {
 	cout << "Enter the access code: ";
@@ -21,6 +28,10 @@ bool Registration::input()
 	}
 }
 
+/// <summary>
+/// Sets the value of attend to either 1 or 0 depending on the value of the argument index
+/// </summary>
+/// <param name="index"></param>
 void Registration::setRecord(bool index)
 {
 	if (index)
@@ -29,6 +40,10 @@ void Registration::setRecord(bool index)
 		attend = 0;
 }
 
+/// <summary>
+/// checks the input matches the access code
+/// </summary>
+/// <returns></returns>
 bool Registration::checkCode()
 {
 	int accesscode = 123456;
@@ -42,6 +57,10 @@ bool Registration::checkCode()
 	}
 }
 
+/// <summary>
+/// returns the value of the property 'code'
+/// </summary>
+/// <returns></returns>
 int Registration::getCode()
 {
 	return code;
